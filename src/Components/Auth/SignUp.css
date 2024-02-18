@@ -1,0 +1,18 @@
+.login-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    width: 35%;
+    z-index: 100;
+    border-radius: 50%;
+  }
+.pointer:hover{
+    cursor: pointer;
+    background-color: coral;
+    border-radius: 7%;
+    color: aliceblue;
+}
+.custom-input:focus {
+    box-shadow: none !important;
+  }
