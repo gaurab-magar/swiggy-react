@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.css';
-
+import PhoneInput from 'react-phone-input-2';
+import  'react-phone-input-2/lib/style.css';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import {auth} from '../../firebase/setUp';
 export const Login = ({setLoginModel}) => {
+  const [phone , setPhone] = useState("");
+  const [user , setUser] = useState(null);
+  const [otp , setOtp] = useState("");
+
+  const sendOtp = async() =>{
+    try{
+      const recaptcha = new RecaptchaVerifier(auth,"recaptcha",{})
+      const cofirmation = await signInWithPhoneNumber(auth,phone,recaptcha)
+      setUser(cofirmation)
+    }catch(error){
+      alert(error.message);
+    }
+  }
+  const verifyOtp = async() => {
+    try{
+      await user.confirm(otp)
+
+    }catch(error){
+      alert(error.message);
+    }
+  }
   return (
     <div>
       <div className="card bg-light border-0 shadow-lg rounded-3 p-3 login-container">
@@ -10,16 +34,21 @@ export const Login = ({setLoginModel}) => {
           <p onClick={()=>{setLoginModel(false)}} className='pointer px-2 fs-4'>&times;</p>
         </div>
         <div className="">
-          <label htmlFor='username' className='fst-italic text-muted'>Username:</label>
-          <input className='form-control custom-input' id='username' placeholder='Username' /><br/>
-          <label htmlFor='password' className='fst-italic text-muted'>Password:</label>
-          <input type='password' className='form-control custom-input' id='password' placeholder='Password' /><br/>
-
+          {/* <label htmlFor='phone' className='fst-italic text-muted'>PhoneNumber:</label>
+          <input className='form-control custom-input' id='phone' placeholder='Your Number...' /><br/> */}
+          <PhoneInput 
+          value={phone}
+          onChange={()=>setPhone(phone)}
+          country='ro'
+          inputStyle={{height:'50px',}}
+          containerStyle={{marginTop:"20px"}}
+          />
         </div>
+        {user && <input onChange={(e) => setOtp(e.target.value)} className='form-control custom-input py-3 my-3 w-75' placeholder='4 Digit Code...' />}
         <div className="d-flex flex-column my-3 gap-3">
-          <button type="button" className="btn btn-outline-info fw-bold">Login</button>
+          <button onClick={sendOtp} type="button" className="btn btn-outline-warning fw-bold">Send OTP</button>
           <p className='text-muted m-0'>Create an  account if you don't have one.</p>
-          <button to='/signup' type="button" className="btn btn-outline-dark fw-bold">SignUp</button>
+          <button onClick={verifyOtp} type="button" className="btn btn-outline-dark fw-bold">verifyOtp</button>
         </div>
       </div>
     </div>
