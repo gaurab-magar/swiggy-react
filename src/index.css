@@ -1,2 +1,10 @@
 /* import 'bootstrap/dist/css/bootstrap.min.css'; */
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
+main{
+    min-height: 90vh;
+}
+.badge{
+    position: absolute;
+    top: -4px;
+    right: -10px;
+}
