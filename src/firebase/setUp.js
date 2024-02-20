@@ -1,17 +1,14 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import {getAuth} from 'firebase/auth';
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBR_kOlN-I1elhUkwhZhb1DGOONbP-eVTg",
-  authDomain: "swiggy-e6463.firebaseapp.com",
-  projectId: "swiggy-e6463",
-  storageBucket: "swiggy-e6463.appspot.com",
-  messagingSenderId: "958518053349",
-  appId: "1:958518053349:web:b6848d895779a5c919070c",
-  measurementId: "G-VT1GNRD4ZC"
+  apiKey: "AIzaSyAywgG9LH7_7uz00U3_GUAbyjyTATNFXSU",
+  authDomain: "swiggy-clone-7f791.firebaseapp.com",
+  projectId: "swiggy-clone-7f791",
+  storageBucket: "swiggy-clone-7f791.appspot.com",
+  messagingSenderId: "668042039813",
+  appId: "1:668042039813:web:d243841a70b27aeab8026c"
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-export const auth = getAuth(app)
+export const auth = getAuth(app);
