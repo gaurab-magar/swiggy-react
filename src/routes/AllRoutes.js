@@ -3,6 +3,7 @@ import {Routes,Route} from 'react-router-dom';
 import {Home } from '../Pages/Home.js';
 import { About } from '../Pages/About.js';
 import {Main} from '../Pages/Main.js';
+import {Search} from "../Pages/Search.js";
 
 
 export const AllRoutes = () => {
@@ -12,6 +13,7 @@ export const AllRoutes = () => {
             <Route path='/' element={<Home />} />
             <Route path='/main' element={<Main />} />
             <Route path='/about' element={<About />} />
+            <Route path='/search' element={<Search />} />
         </Routes>
     </div>
   )
