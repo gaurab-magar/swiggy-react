@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { getRestraunts } from '../API/Api';
 
+
 export const Search = () => {
     const [restrauntLists , setRestrauntList] = useState([]);
-    
+    const [searchItems , setSearchItems] = useState([]);
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
@@ -19,12 +20,20 @@ export const Search = () => {
         };
         fetchRestaurants();
     }, []);
+
+    const handleSearch = ()=>{
+        let filterData = restrauntLists.filter((item)=>{
+           return item.name.toLowerCase().includes(searchItems.toLowerCase())  ||  searchItems === '';
+       });
+        setRestrauntList(filterData);
+        setSearchItems('');
+    }
   return (
     <main>
         <div className="container my-4">
            <div className='row'>
                 <div className='d-flex flex-column justify-content-center align-items-center'>
-                    <input className='form-control my-4 w-50 p-3' placeholder='Search for restaurants and food'></input>
+                    <input onChange={handleSearch} className='form-control my-4 w-50 p-3' placeholder='Search for restaurants and food'></input>
                 </div>
            </div>
            <section className='container border'>
@@ -54,7 +63,7 @@ export const Search = () => {
            </section>
            <section className=' py-4 container'>
                 <div className='row my-4'>
-                    {restrauntLists.map((data)=>(
+                    {searchItems && restrauntLists.map((data)=>(
                         <Restraunt  key={Math.random()} data={data} />
                     ))}
                 </div>
